@@ -4,65 +4,48 @@ const calcBtn = document.querySelectorAll("button")
 const display = document.getElementById("calc-display")
 const resultDisplay = document.getElementById("result-display")
 const calculations = document.getElementById("calculations")
+const equals = document.getElementById("equals")
+const clear = document.getElementById("clear")
+const back = document.getElementById("back")
 
 let numOne = [];
 let numTwo = [];
 let operators = [];
 let result = [];
 let operationsArray = []
+let evalArray = []
 
 let operatorNotClick = true;
 let itsNotOver = true;
 
-operand.forEach((sum) => {
+
+
+const calc = (button) => {
+    console.log(button.value)
+    evalArray.push(button.value)
+    calculations.innerText = evalArray.filter((x)=>x!=="=").join("")
     
-    sum.addEventListener("click", () => {
-        if(itsNotOver){
-        if(operatorNotClick){
-            numOne.push(+sum.value)
-            operationsArray.push(+sum.value)
-            calculations.innerText = operationsArray.join("")
-        }else{
-            numTwo.push(+sum.value)
-            operationsArray.push(+sum.value)
-            calculations.innerText = operationsArray.join("")
-        }
-
-        operator.forEach((op) => {
-            op.addEventListener("click", () => {
-                operatorNotClick = false
-                operators.push(op.value)
-                console.log(operators)
-                console.log(operators[0])
-                if(operators.length < 2){
-                    operationsArray.push(operators[0])
-                }
-                calculations.innerText = operationsArray.join("")
-                calc(operators[0])
-            })
-        
-            
-        })
-        let num1 = numOne.join("")
-        let num2 = numTwo.join("")
-
-        function calc (hmm){
-            if(+num1 > 0 && +num2 > 0){
-                if(hmm === "+"){
-                    result.push(+num1 + +num2)
-                }else if(hmm === "-"){
-                    result.push(+num1 - +num2)
-                }else if(hmm === "x"){
-                    result.push(+num1 * +num2)
-                }else if(hmm === "/"){
-                    result.push(+num1 / +num2)
-                }
-                resultDisplay.innerText = result[0]
-                itsNotOver = false;
-            }
-            console.log(operationsArray)
-        } 
+    if(button.value === "="){
+        calculations.innerText = ""
+        let evalConnect = evalArray.slice(0,-1).join("")
+        //console.log(eval(evalConnect))
+        resultDisplay.innerText = eval(evalConnect)
     }
+    if(button.value === "clear"){
+        evalArray.length = 0
+        resultDisplay.innerText = ""
+        calculations.innerText = ""
+    }
+    /*if(button.value === "back"){
+        evalArray.pop()
+        console.log(evalArray.pop())
+        //calculations.innerText = evalArray.pop().join("")
+    }*/
+}
+
+operand.forEach((button) => {
+    button.addEventListener(("click"), () => {
+        calc(button)
     })
 })
 

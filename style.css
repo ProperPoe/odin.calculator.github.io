@@ -24,7 +24,8 @@
     border: 1px solid black;
     width: 200px;
     height: 40px;
-    position: relative;
+    
+   
 }
 #result-display {
     height: 20px;
@@ -35,7 +36,6 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    position: sticky;
 }
 
 .calc-btn-container {
