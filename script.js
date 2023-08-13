@@ -12,9 +12,12 @@ let result = [];
 let operationsArray = []
 
 let operatorNotClick = true;
+let itsNotOver = true;
 
 operand.forEach((sum) => {
+    
     sum.addEventListener("click", () => {
+        if(itsNotOver){
         if(operatorNotClick){
             numOne.push(+sum.value)
             operationsArray.push(+sum.value)
@@ -55,11 +58,14 @@ operand.forEach((sum) => {
                     result.push(+num1 / +num2)
                 }
                 resultDisplay.innerText = result[0]
+                itsNotOver = false;
             }
             console.log(operationsArray)
         } 
+    }
     })
 })
+
 
 
 
